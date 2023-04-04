@@ -12,4 +12,4 @@ jobs:
       # Replace @main with the commit hash of the latest commit on the pull request branch
       - uses: nilsreichardt/remove-safe-to-test-label@main
         with:
-          github-token: ${{ secrets.PAT }}
+          repo-token: ${{ secrets.PAT }}
