@@ -8,6 +8,8 @@ jobs:
   e2e-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # Replace @main with the commit hash of the latest commit on the pull request branch
       - uses: nilsreichardt/remove-safe-to-test-label@main
+        with:
+          github-token: ${{ secrets.PAT }}
