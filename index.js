@@ -4,7 +4,7 @@ const github = require('@actions/github');
 async function run() {
     try {
         const context = github.context;
-        
+
         if (context.eventName !== 'pull_request') {
             core.setFailed('This action only works with pull_request events.');
             return;
