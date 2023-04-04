@@ -1,7 +1,8 @@
 name: e2e-test
 
 on:
-  pull_request:
+  pull_request_target:
+    types: [labeled, synchronize, reopened]
 
 jobs:
   e2e-test:
