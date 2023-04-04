@@ -31,7 +31,7 @@ async function run() {
 
         // Remove the "safe-to-test" label
         const octokit = new github.getOctokit(core.getInput('repo-token'));
-        await octokit.issues.removeLabel({
+        await octokit.rest.issues.removeLabel({
             owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: context.payload.pull_request.number,
