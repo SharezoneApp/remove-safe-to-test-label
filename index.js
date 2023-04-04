@@ -30,7 +30,7 @@ async function run() {
         }
 
         // Remove the "safe-to-test" label
-        const client = new github.GitHub(core.getInput('repo-token'));
+        const client = new github.getOctokit(core.getInput('repo-token'));
         await client.issues.removeLabel({
             owner: context.repo.owner,
             repo: context.repo.repo,
