@@ -5,8 +5,8 @@ async function run() {
     try {
         const context = github.context;
 
-        if (context.eventName !== 'pull_request') {
-            core.setFailed('This action only works with pull_request events.');
+        if (context.eventName !== 'pull_request' && context.eventName !== 'pull_request_target') {
+            core.setFailed('This action only works with pull_request and pull_request_target events.');
             return;
         }
 
