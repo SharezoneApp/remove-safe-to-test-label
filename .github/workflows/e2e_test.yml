@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Replace @main with the commit hash of the latest commit on the pull request branch
-      - uses: nilsreichardt/remove-safe-to-test-label@5a57cc553cbbcca04a392d128674899f4b6a9d88
+      - uses: nilsreichardt/remove-safe-to-test-label@98dbbdf273366a3761172849e7e548dfc87657fa
