@@ -44,4 +44,7 @@ async function run() {
     }
 }
 
+// Export is only used for testing
+module.exports = run;
+
 run();
