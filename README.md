@@ -22,7 +22,7 @@ new commit is pushed to the PR so that the change can be reviewed again.
 This GitHub Action removes the "safe to test" label when the PR is from a fork.
 
 To verify if jobs have the "safe to test" label, you can use the
-[verify-safe-to-test-label](https://github.com/nilsreichardt/verify-safe-to-test-label)
+[verify-safe-to-test-label](https://github.com/SharezoneApp/verify-safe-to-test-label)
 GitHub Action.
 
 ## Usage
@@ -41,7 +41,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Remove "safe to test" label, if PR is from a fork
-        uses: nilsreichardt/remove-safe-to-test-label@v1
+        uses: SharezoneApp/remove-safe-to-test-label@v1
 ```
 
 ### Inputs
