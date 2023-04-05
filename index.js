@@ -21,7 +21,7 @@ async function run() {
 
         const safeToTestLabelName = core.getInput('label');
 
-        // Check if pull request has the "safe-to-test" label
+        // Check if pull request has the "safe to test" label
         const labels = context.payload.pull_request.labels;
         const safeToTestLabel = labels.find(label => label.name === safeToTestLabelName);
         if (!safeToTestLabel) {
