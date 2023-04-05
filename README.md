@@ -30,17 +30,17 @@ GitHub Action.
 ```yaml
 jobs:
   # It's important that you run this job first, because you need to remove the
-  # "safe to build" label when the PR comes from a fork in order to ensure that
+  # "safe to test" label when the PR comes from a fork in order to ensure that
   # every change is reviewed for security implications. Other jobs should use the
   # "needs" keyword to depend on this job.
   remove-safe-to-build-label:
     runs-on: ubuntu-latest
     permissions:
-      # Required to remove the "safe to build" label
+      # Required to remove the "safe to test" label
       contents: read
       pull-requests: write
     steps:
-      - name: Remove "safe to build" label, if PR is from a fork
+      - name: Remove "safe to test" label, if PR is from a fork
         uses: nilsreichardt/remove-safe-to-test-label@v1
 ```
 
