@@ -28,6 +28,12 @@ GitHub Action.
 ## Usage
 
 ```yaml
+on:
+  # This action only works with pull_request and pull_request_target events.
+  # 
+  # For other events, it succeeds with exit code 0.
+  pull_request: # or pull_request_target
+
 jobs:
   # It's important that you run this job first, because you need to remove the
   # "safe to test" label when the PR comes from a fork in order to ensure that
