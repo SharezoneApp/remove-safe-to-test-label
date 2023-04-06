@@ -134,7 +134,7 @@ describe('remove-safe-to-test-label', () => {
         await run();
 
         expect(core.setFailed).toHaveBeenCalledWith(
-            'This action only works with pull_request and pull_request_target events.'
+            'This action only works with the following events: pull_request, pull_request_target, merge_group.'
         );
     });
 
