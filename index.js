@@ -42,6 +42,14 @@ async function run() {
         });
         console.log(`Removed the "safe-to-test" label from pull request.`);
     } catch (error) {
+        // When multiple actions are executed in a workflow, the action may try
+        // to remove a label that was already removed by another action (race
+        // condition).
+        if (error.message === 'Label does not exist') {
+            console.log('Label was removed during the execution of the action, skipping.');
+            return;
+        }
+
         core.setFailed(error.message);
     }
 }

@@ -150,4 +150,62 @@ describe('remove-safe-to-test-label', () => {
             expect(core.setFailed).toHaveBeenCalledWith(errorMessage);
         }
     });
+
+    test('should handle the error when the label does not exist', async () => {
+        // Mock console.log
+        const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+
+        const payload = {
+            pull_request: {
+                head: {
+                    repo: {
+                        full_name: 'fork-owner/repo',
+                    },
+                },
+                base: {
+                    repo: {
+                        full_name: 'base-owner/repo',
+                    },
+                },
+                labels: [
+                    {
+                        name: 'safe-to-test',
+                    },
+                ],
+                number: 1,
+            },
+            repository: {
+                full_name: 'base-owner/repo',
+            },
+        };
+
+        github.context.eventName = 'pull_request';
+        github.context.payload = payload;
+        github.context.repo = { owner: 'base-owner', repo: 'repo' };
+
+        core.getInput.mockReturnValueOnce('safe-to-test');
+
+        const mockRemoveLabel = jest.fn().mockRejectedValue(new Error('Label does not exist'));
+        github.getOctokit.mockReturnValue({
+            rest: {
+                issues: {
+                    removeLabel: mockRemoveLabel,
+                },
+            },
+        });
+
+        await run();
+
+        expect(mockRemoveLabel).toHaveBeenCalledWith({
+            owner: 'base-owner',
+            repo: 'repo',
+            issue_number: 1,
+            name: 'safe-to-test',
+        });
+        expect(consoleSpy).toHaveBeenCalledWith('Label was removed during the execution of the action, skipping.');
+        expect(core.setFailed).toHaveBeenCalledTimes(0); // Ensure setFailed was not called, indicating the action handled the error gracefully.
+
+        // Restore console.log to its original implementation
+        consoleSpy.mockRestore();
+    });
 });
